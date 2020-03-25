@@ -2,6 +2,7 @@
 let startGame = document.getElementById("startGame");
 let overlay = document.getElementById("overlay")
 // WHEN START BUTTON IS CLICKED IT REMOVES THE OVERLAY LETTING THE GAME BEGIN
+
 startGame.addEventListener("click", function(e){
     // Checking that when i click start button the id pop up
     // console.log(e.target.id)
@@ -27,10 +28,13 @@ const players = {
     'blue': '-1'
 }
 
+
 // console.log(players['red']);
 
 // Defining whos starting the game
 let turn = 1;
+let player1 = document.getElementById("player1");
+
 
 
 let column = document.getElementsByClassName("circle");
@@ -96,15 +100,21 @@ function render(){
         for (let columnIndex = 0; columnIndex < board[rowIndex].length; columnIndex++) {
             // ORIGINALY FINDING THE specific Circle clicked
             let circle = document.getElementById("c" + columnIndex + "r" + rowIndex);
-            let player1 = document.getElementById("player1"); 
+            
+              
             // console.log(circle);
             // WHEN CLICK fill in based on Players turn
+
+            
             if(board[rowIndex][columnIndex] === 1) {
                 circle.style.background = 'red';
-                // player1.style = "outline : solid";
+                player1.style.backgroundColor = "rgb(255,0,0,.2)"
+                
+                
             } else if(board[rowIndex][columnIndex] === -1) {
                 circle.style.background = 'blue';
-                // player1.style = "outline : double";
+                p1d = document.getElementsByClassName("p1d").style.backgroundColor = "none";
+               
             }
         }
     }
@@ -295,60 +305,3 @@ function checkWinner(){
 
 
 
-// const winninBoard = [
-//     [-1,-1,-1,-1], // track consecutive plays
-//     [-1,1,1,-1],// track consecutive plays
-//     [-1,1,1,-1],
-//     [-1,1,1,-1]
-// ]
-
-
-
-// const winHorizontal = (winninBoard) => {
-
-//     // outer loop
-//     for (let row in winninBoard) {
-//        console.log(winninBoard[row])
-//         let lastSeen = null;
-//         let currentCount = 0;
-//        // inner loop
-//        for (let index in winninBoard[row]) {
-//            console.log(winninBoard[row][index])
-//         //    check to change the value to the current number
-//         if(lastSeen === null){
-//             lastSeen = winninBoard[row][index];
-//             currentCount = 1;
-//         } else if(lastSeen === winninBoard[row][index]) {
-//             currentCount++;
-//             if(currentCount === 4){
-//                 return lastSeen
-//             }
-//         } else if(lastSeen !== winninBoard[row][index]) {
-//             lastSeen = winninBoard[row][index];
-//             currentCount = 0;
-
-//         }
-//        }
-//     }
-
-//     // loop outer way 2
-//     // horizontal loop the outer one twice
-//     return false;
-// }
-// console.log(winHorizontal(winninBoard));
-
-// // win function
-
-//     // win horionx
-//     const winHoriz = winHorizontal(winninBoard);
-//     // -1 , 1, false
-//     // win vertical
-//         // -1 , 1, false
-
-//     if (winHoriz === -1 || winVertical === -1) {
-//         // someone won the game
-//        console.log(`player 2 won`);
-
-//     } else if ( winVertical !== false ) {
-
-//     }

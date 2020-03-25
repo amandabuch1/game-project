@@ -42,15 +42,22 @@ header{
 
 }
 
-#player1 {
+#player1{
     outline: 3px solid red;
     padding: 3px;
+    
 }
+
+
 
 #player2 {
     outline: 3px solid blue;
     padding: 3px;
 }
+
+
+
+
 
 .grid {
     display: grid;
