@@ -1,3 +1,4 @@
+  
 /** constants */
 // defining the players
 const players = {
@@ -21,12 +22,13 @@ let turn = 1;
 let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
 player2.style.backgroundColor = "rgb(0,0,255,.2)";
-/** cached elem refs */
+
 // START BUTTON
 let startGame = document.getElementById("startGame");
 let restartGame = document.getElementById("restartGame");
 let overlay = document.getElementById("overlay");
 let column = document.getElementsByClassName("circle");
+let winner = document.getElementById("winner");
 /** event listeners */
 // WHEN START BUTTON IS CLICKED IT REMOVES THE OVERLAY LETTING THE GAME BEGIN
 startGame.addEventListener("click", function(e){
@@ -35,21 +37,29 @@ startGame.addEventListener("click", function(e){
     overlay.parentNode.removeChild(overlay);
 })
 
+
+// When resart is clicked game starts over
 restartGame.addEventListener("click", function(){
-    let board = [
+    handleClick(board = [
         ["", "", "", "", "", "", ""],
         ["", "", "", "", "", "", ""],
         ["", "", "", "", "", "", ""],
         ["", "", "", "", "", "", ""],
         ["", "", "", "", "", "", ""],
         ["", "", "", "", "", "", ""]
-    ]
+    ])
+ 
     turn = 1;
     player2.style.backgroundColor = "rgb(0,0,255,.2)";
-    player1.style.backgroundColor = "rgb(255,0,0,0)";
-    handleClick();
-
-
+    player1.style.backgroundColor = "rgb(0,0,0,0)";
+    winner.innerHTML = "";
+    // In order to reset the cicles on the board
+    for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < board[rowIndex].length; columnIndex++) {
+            let circle = document.getElementById("c" + columnIndex + "r" + rowIndex);     
+            circle.style.background = ' rgb(220,220,220)';
+        }
+    }
 })
 
 for (let index = 0; index < column.length; index++) {
@@ -65,8 +75,8 @@ function handleClick(e){
     let idxRow = parseInt(event.target.id[3]);
     dropToBottom(idxColumn);
     // board[idxRow][idxColumn] = turn;
-    // Switching between turns
-
+    
+    // Switching turns and switch the background of player1/2
     switchBackgroundPlayer();
     turn *= -1;
     render();
@@ -101,7 +111,6 @@ function render(){
         for (let columnIndex = 0; columnIndex < board[rowIndex].length; columnIndex++) {
             // ORIGINALY FINDING THE specific Circle clicked
             let circle = document.getElementById("c" + columnIndex + "r" + rowIndex);
-            let player1 = document.getElementById("player1"); 
             // console.log(circle);
             // WHEN CLICK fill in based on Players turn
             if(board[rowIndex][columnIndex] === 1) {
@@ -157,9 +166,9 @@ function checkWinner(board){
             // add all the points to equal -4 or 4
                 total += diagnolWinningCombos[i][j];
                 if(total === 4){
-                    console.log("player 1 won")
+                    winner.innerHTML = "Player 1 won!"; 
                 }else if(total === -4){
-                    console.log("player 2 won")
+                    winner.innerHTML = "Player 2 won!";
                 }
             }   
             // add all the points to equal -4 or 4

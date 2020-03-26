@@ -12,7 +12,6 @@
 
 </head>
 <body>
-    <!-- NEED TO DO DISPLAY INORDER TO MAKE THIS PAGE COME UP BEFORE GAME BOARD -->
     <div id="overlay">
         <div>
             <h1>Connect Four</h1>
@@ -23,7 +22,6 @@
         <div>
             <button id="startGame">Start</button>
         </div>
-        
     </div>
     <div id="gameContainer">
         <header>
@@ -34,12 +32,14 @@
                 <div class="player">
                     <h3 id="player1">Player 1</h3>
                 </div>
-    
                 <div class="player">
                     <h3 id="player2">Player 2</h3>
                 </div>
             </div>
         </header>
+        <div>
+            <h1 id="winner"></h1>
+        </div>
         <div class="grid" >
             <div class="column" id="0">
                 <div id="c0r0" class="circle"></div>
@@ -102,14 +102,5 @@
     <div>
         <button id="restartGame">Restart</button>
     </div>
-
-    <!-- <div id="restartOverlay">
-        <div>
-            <h1 id="playerWhoWon"> </h1>
-        </div>
-
-        
-    </div> -->
-
 </body>
 </html>
