@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Connect Four</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css">
     <script defer src="js/app.js"></script>
-
 </head>
 <body>
-    <!-- NEED TO DO DISPLAY INORDER TO MAKE THIS PAGE COME UP BEFORE GAME BOARD -->
     <div id="overlay">
         <div>
             <h1>Connect Four</h1>
         </div>
         <div>
-            <p>Connect Four is like tic-tac toe but instead of 3 in a row you need 4 and the piece drop to the bottom of the board. </p>
+            <p>Connect Four is like tic-tac toe but instead of 3 in a row you need 4 and the piece drop to the bottom of the board.</p>
         </div>
         <div>
             <button id="startGame">Start</button>
         </div>
-        
     </div>
     <div id="gameContainer">
         <header>
             <div class="title">
-                <h1>Connect 4</h1>
+                <h2>Connect Four</h1>
             </div>
             <div id="players">
                 <div class="player">
                     <h3 id="player1" class="p1s p1d">Player 1</h3>
                 </div>
-    
                 <div class="player">
                     <h3 id="player2" class="p2s p2d" >Player 2</h3>
                 </div>
             </div>
         </header>
+        <div>
+            <h1 id="winner"></h1>
+        </div>
         <div class="grid" >
             <div class="column" id="0">
                 <div id="c0r0" class="circle"></div>
@@ -96,7 +97,8 @@
             </div>
         </div>
     </div>
-    
-    
+    <div>
+        <button id="restartGame">Restart</button>
+    </div>
 </body>
 </html>
