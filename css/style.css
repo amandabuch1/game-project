@@ -94,10 +94,6 @@ p {
     text-align: center;
 }
 
-#restart {
-    margin: 50px;
-}
-
 button {
  font-family:Helvetica, sans-serif;
  font-size: 14px;
@@ -109,4 +105,3 @@ button {
     align-items: center;
     flex-flow: column;
 }
-

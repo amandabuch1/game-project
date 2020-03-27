@@ -395,7 +395,7 @@ const winHorizontal = (winninBoard) => {
     // win vertical
         // -1 , 1, false
 
-    if (winHoriz === -1 || winVertical === -1) {
+    if (winHoriz === -1 ) {
         // someone won the game
        console.log(`player 2 won`);
 
@@ -420,14 +420,7 @@ const winVertical = (winninBoard) => {
         let firstNumInArray = winninBoard[row][0];
 
         console.log(winninBoard[row][0])
-        let lastSeen = null;
-        let currentCount = 0;
-        function pW(firstNumInArray) {
-            
-            if (let index = 5; index > -1; index-- in winninBoard) {
-                
-            }           
-        }    
+
     }
 }
 

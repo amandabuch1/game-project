@@ -37,9 +37,8 @@ startGame.addEventListener("click", function(e){
     overlay.parentNode.removeChild(overlay);
 })
 
-
-// When resart is clicked game starts over
-restartGame.addEventListener("click", function(){
+const restartTheGame = () => {
+    document.querySelector('.grid').style.pointerEvents = "initial";
     handleClick(board = [
         ["", "", "", "", "", "", ""],
         ["", "", "", "", "", "", ""],
@@ -60,27 +59,30 @@ restartGame.addEventListener("click", function(){
             circle.style.background = ' rgb(220,220,220)';
         }
     }
-})
+}
+
+// When resart is clicked game starts over
+restartGame.addEventListener("click", restartTheGame)
 
 for (let index = 0; index < column.length; index++) {
     const element = column[index];
     element.addEventListener("click", handleClick);
 }
 /** functions */
-// console.log(players['red']);
 function handleClick(e){
     // FINDING THE INDEX OF THE COLUMN CLICKED
     let idxColumn = parseInt(event.target.id[1]);
     // FINDING THE INDEX OF THE ROW CLICKED
     let idxRow = parseInt(event.target.id[3]);
-    dropToBottom(idxColumn);
+   
     // board[idxRow][idxColumn] = turn;
-    
+    if (dropToBottom(idxColumn)) {
     // Switching turns and switch the background of player1/2
-    switchBackgroundPlayer();
-    turn *= -1;
-    render();
-    checkWinner(board);
+        switchBackgroundPlayer();
+        turn *= -1;
+        render();
+        checkWinner(board);
+    }
 }
 
 function switchBackgroundPlayer(){
@@ -94,11 +96,17 @@ function switchBackgroundPlayer(){
 }
 // Make it so it fills in bottom row first and moves upward
 function dropToBottom(idxColumn){
+    let currentFilled = 0;
     for (let index = 5; index > -1; index--) {
-        if(board[index][idxColumn] === ""){
-            board[index][idxColumn] = turn;
-            return;
+        if (board[index][idxColumn] !== "" ) {
+            currentFilled ++;
         }
+        else if(currentFilled < 6 && board[index][idxColumn] === ""){
+            board[index][idxColumn] = turn;
+            return true;
+        }
+
+        else if (currentFilled === 6) return false;
     }    
 }
 
@@ -127,6 +135,7 @@ function render(){
 
 
 function checkWinner(board){
+    
 // for loop on an Array
 
     // diagnol win
@@ -167,8 +176,10 @@ function checkWinner(board){
                 total += diagnolWinningCombos[i][j];
                 if(total === 4){
                     winner.innerHTML = "Player 1 won!"; 
+                    document.querySelector('.grid').style.pointerEvents = "none";
                 }else if(total === -4){
                     winner.innerHTML = "Player 2 won!";
+                    document.querySelector('.grid').style.pointerEvents = "none";
                 }
             }   
             // add all the points to equal -4 or 4
@@ -177,44 +188,43 @@ function checkWinner(board){
 
     diagnolWin();
 
-    // const winHorizontal = (board) => {
-    //     // outer loop
-    //    console.log(board)
-    //     for (let i = 0; i < board.length; i++) {
-    //         let lastSeen = null;
-    //         let currentCount = 0;
-    //     //    inner loop
-    //         console.log(board[i])
-    //        for (let index in board[i]) {
-    //            console.log( !!board[i][index])
-    //         //    check to change the value to the current number
-    //             if(lastSeen === null && !!board[i][index]){
-    //                 lastSeen = board[i][index];
-    //                 currentCount = 1;
-    //             } else if(lastSeen === board[i][index]) {
-    //                 currentCount++;
-    //                 if(currentCount === 4){
-    //                     return lastSeen
-    //                 }
-    //             } else if(lastSeen !== board[i][index]) {
-    //                 lastSeen = board[i][index];
-    //                 currentCount = 0;
-    //             }
-    //        }
-    //     }
+    const winHorizontal = (board) => {
+        // outer loop
+        for (let i = 0; i < board.length; i++) {
+            let lastSeen = null;
+            let currentCount = 0;
+        //    inner loop
+           for (let index in board[i]) { 
+            //    check to change the value to the current number
+                if(lastSeen === null && board[i][index] !== ""){
+                    lastSeen = board[i][index];
+                    currentCount = 1;
+                } else if(lastSeen === board[i][index]) {
+                    currentCount++;
+                    if(currentCount === 4){
+                        return lastSeen
+                    }
+                } else if(lastSeen !== board[i][index] && board[i][index] !== "") {
+                    lastSeen = board[i][index];
+                    currentCount = 1;
+                } else if (board[i][index] === "") {
+                    lastSeen = null;
+                    currentCount = 0;
+                }
+           }
+        }
     
-    //     // loop outer way 2
-    //     // horizontal loop the outer one twice
-    //     return false;
-    // }
+        // loop outer way 2
+        // horizontal loop the outer one twice
+        return ;
+    }
     
-    //      // console.log(winHorizontal(board));
-    
-    //     // win function
-    //     // win horionx
-    //     const winHoriz = winHorizontal(board);
-    //     // -1 , 1, false
-    //     // win vertical
-    //     // -1 , 1, false
+        const winHoriz = winHorizontal(board);
+        if (winHoriz === -1) {
+            winner.innerHTML = "Player 2 won!";
+            document.querySelector('.grid').style.pointerEvents = "none";
+        } else if (winHoriz === 1) {
+            winner.innerHTML = "Player 1 won!";
+        }
        
 }
