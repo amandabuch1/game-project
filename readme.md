@@ -1,16 +1,18 @@
 # Connect Four
 
+Connect four is a classic board game that is played between two people. Each person takes turns clicking on one of seven columns to “drop” their colored chip. The goal of the game is to get 4 consecutive pieces of the same color in a row.  This row can be in any direction: horizontal, vertical, or diagonal. 
+
 ## Screenshot:
 
-THe image shows the start of the game
+Start of the game:
 
 <img src="https://i.imgur.com/w871ATo.png">
 
-The image shows the game in pr
+Playing the game:
 
 <img src="https://i.imgur.com/w871ATo.png">
 
-The image shows what happens during a win
+Winning the game:
 
 <img src="https://i.imgur.com/w871ATo.png">
 
@@ -23,6 +25,10 @@ The image shows what happens during a win
 
 ## Link to the game:
 
+https://amandabuch1.github.io/game-project/
+
 ## Next steps:
+
+I plan on refactoring my code later. I also specifically want to clean up the check winner function. I also want to clean up the css. I would like to add animations to the game and make it compatible with different devices.
 
 
