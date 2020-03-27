@@ -23,17 +23,17 @@ let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
 player2.style.backgroundColor = "rgb(0,0,255,.2)";
 
-// START BUTTON
+
 let startGame = document.getElementById("startGame");
 let restartGame = document.getElementById("restartGame");
 let overlay = document.getElementById("overlay");
 let column = document.getElementsByClassName("circle");
 let winner = document.getElementById("winner");
+
 /** event listeners */
+// START BUTTON CLICK FUNCTION
 // WHEN START BUTTON IS CLICKED IT REMOVES THE OVERLAY LETTING THE GAME BEGIN
 startGame.addEventListener("click", function(e){
-    // Checking that when i click start button the id pop up
-    // console.log(e.target.id)
     overlay.parentNode.removeChild(overlay);
 })
 
@@ -61,13 +61,14 @@ const restartTheGame = () => {
     }
 }
 
-// When resart is clicked game starts over
-restartGame.addEventListener("click", restartTheGame)
+// When restart is clicked game starts over
+restartGame.addEventListener("click", restartTheGame);
 
 for (let index = 0; index < column.length; index++) {
     const element = column[index];
     element.addEventListener("click", handleClick);
 }
+
 /** functions */
 function handleClick(e){
     // FINDING THE INDEX OF THE COLUMN CLICKED
@@ -94,23 +95,24 @@ function switchBackgroundPlayer(){
         player2.style.backgroundColor = "rgb(0,0,255,.2)"
     }
 }
+
 // Make it so it fills in bottom row first and moves upward
+// Lets you know when column is filled 
 function dropToBottom(idxColumn){
     let currentFilled = 0;
     for (let index = 5; index > -1; index--) {
         if (board[index][idxColumn] !== "" ) {
             currentFilled ++;
         }
-        else if(currentFilled < 6 && board[index][idxColumn] === ""){
+        else if (currentFilled < 6 && board[index][idxColumn] === "") {
             board[index][idxColumn] = turn;
             return true;
         }
-
         else if (currentFilled === 6) return false;
     }    
 }
 
-function render(){
+function render() {
     // Lets me know whats filled in on the board in javascript
     // In order to figure out whats being used
     // LOOPS THROUGH ROWS
@@ -119,26 +121,17 @@ function render(){
         for (let columnIndex = 0; columnIndex < board[rowIndex].length; columnIndex++) {
             // ORIGINALY FINDING THE specific Circle clicked
             let circle = document.getElementById("c" + columnIndex + "r" + rowIndex);
-            // console.log(circle);
             // WHEN CLICK fill in based on Players turn
             if(board[rowIndex][columnIndex] === 1) {
                 circle.style.background = 'red';
-                // player1.style = "outline : solid";
             } else if(board[rowIndex][columnIndex] === -1) {
                 circle.style.background = 'blue';
-                // player1.style = "outline : double";
             }
         }
     }
 }
 
-
-
 function checkWinner(board){
-    
-// for loop on an Array
-
-    // diagnol win
     const diagnolWin = () =>{
         let diagnolWinningCombos = [
             [board[3][0],board[2][1],board[1][2],board[0][3]],
@@ -174,15 +167,14 @@ function checkWinner(board){
             for (let j = 0; j < diagnolWinningCombos[i].length; j++) {
             // add all the points to equal -4 or 4
                 total += diagnolWinningCombos[i][j];
-                if(total === 4){
+                if(total === 4) {
                     winner.innerHTML = "Player 1 won!"; 
                     document.querySelector('.grid').style.pointerEvents = "none";
-                }else if(total === -4){
+                } else if(total === -4) {
                     winner.innerHTML = "Player 2 won!";
                     document.querySelector('.grid').style.pointerEvents = "none";
                 }
             }   
-            // add all the points to equal -4 or 4
         }
     }
 
@@ -213,18 +205,37 @@ function checkWinner(board){
                 }
            }
         }
-    
-        // loop outer way 2
-        // horizontal loop the outer one twice
-        return ;
+        return false;
     }
-    
+
+    const verticalWin = (board) => {
+        for (let i = 0; i < board.length; i++) {
+            let lastSeen = null;
+            let currentCount = 0;
+            for (let x = 0; x < board.length; x++) {
+                if (lastSeen === null && board[x][i] !== "") {
+                    lastSeen = board[x][i];
+                    currentCount = 1;
+                } else if (lastSeen === board[x][i]) {
+                    currentCount++;
+                    if (currentCount === 4) return lastSeen;
+                }
+                else if (board[x][i] !== "" && lastSeen !== board[x][i]) {
+                    lastSeen = board[x][i];
+                    currentCount = 1;
+                }
+            }
+        }
+        return false;
+    }
+
+        const winVert = verticalWin(board);
         const winHoriz = winHorizontal(board);
-        if (winHoriz === -1) {
+        if (winHoriz === -1 || winVert === -1) {
             winner.innerHTML = "Player 2 won!";
             document.querySelector('.grid').style.pointerEvents = "none";
-        } else if (winHoriz === 1) {
+        } else if (winHoriz === 1 || winVert === 1) {
             winner.innerHTML = "Player 1 won!";
+            document.querySelector('.grid').style.pointerEvents = "none";
         }
-       
 }
