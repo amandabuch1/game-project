@@ -6,15 +6,15 @@ Connect four is a classic board game that is played between two people. Each per
 
 Start of the game:
 
-<img src="https://i.imgur.com/w871ATo.png">
+<img src="https://imgur.com/a/IF4iot8">
 
 Playing the game:
 
-<img src="https://i.imgur.com/w871ATo.png">
+<img src="https://imgur.com/a/dZUZxEM">
 
 Winning the game:
 
-<img src="https://i.imgur.com/w871ATo.png">
+<img src="https://imgur.com/a/s36zzcU">
 
 
 ## Technologies used:
@@ -23,9 +23,7 @@ Winning the game:
 - CSS
 - JavaScript
 
-## Link to the game:
 
-https://amandabuch1.github.io/game-project/
 
 ## Next steps:
 
